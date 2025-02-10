@@ -62,3 +62,4 @@ terraform_show_json=$(terraform show -json)
 # fi
 
 echo "*** Migration is done. ***"
+# check if main is that issue
