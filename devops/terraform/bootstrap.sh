@@ -44,7 +44,7 @@ az role assignment create --assignee "$USER_OBJECT_ID" \
   --role "Storage Blob Data Contributor" \
   --scope "/subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/$TF_VAR_mgmt_resource_group_name/providers/Microsoft.Storage/storageAccounts/$TF_VAR_mgmt_storage_account_name"
 
-# Function to check if the role assignment exists
+# Function to check if the role assignments exists
 check_role_assignments() {
   local sbdc
   sbdc=$(az role assignment list \
