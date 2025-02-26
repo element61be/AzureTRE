@@ -76,7 +76,7 @@ while [ -z "$(check_role_assignments)" ]; do
   sleep 10
 done
 echo "Role assignment applied."
-
+sleep 30
 # Blob container
 # shellcheck disable=SC2154
 az storage container create --account-name "$TF_VAR_mgmt_storage_account_name" --name "$TF_VAR_terraform_state_container_name" --auth-mode login -o table
