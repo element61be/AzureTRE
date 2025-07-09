@@ -108,3 +108,18 @@ resource "azurerm_private_endpoint" "sspe" {
     subresource_names              = ["Sql"]
   }
 }
+
+resource "azurerm_monitor_diagnostic_setting" "cosmos" {
+  name                       = "diagnostics-cosmos-${var.tre_id}"
+  target_resource_id         = azurerm_cosmosdb_account.tre_db_account.id
+  log_analytics_workspace_id = module.azure_monitor.log_analytics_workspace_id
+
+  dynamic "enabled_log" {
+    for_each = setintersection(data.azurerm_monitor_diagnostic_categories.cosmos, local.cosmos_diagnostic_categories_enabled)
+    content {
+      category = enabled_log.value
+    }
+  }
+
+  lifecycle { ignore_changes = [log_analytics_destination_type] }
+}

@@ -70,3 +70,20 @@ resource "azurerm_key_vault_secret" "db_password" {
 
   lifecycle { ignore_changes = [tags] }
 }
+
+resource "azurerm_monitor_diagnostic_setting" "mysql_gitea" {
+  name                       = "diagnostics-mysql-${var.tre_id}"
+  target_resource_id         = azurerm_mysql_flexible_server.gitea.id
+  log_analytics_workspace_id = data.azurerm_log_analytics_workspace.tre.id
+
+  dynamic "enabled_log" {
+    for_each = [
+      for category in data.azurerm_monitor_diagnostic_categories.mysql.log_category_types :
+      category if contains(local.mysql_diagnostic_categories_enabled, category)
+    ]
+    content {
+      category = enabled_log.value
+
+    }
+  }
+}

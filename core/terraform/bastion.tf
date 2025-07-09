@@ -27,3 +27,20 @@ resource "azurerm_bastion_host" "bastion" {
 
   lifecycle { ignore_changes = [tags] }
 }
+
+resource "azurerm_monitor_diagnostic_setting" "bastion" {
+  name                       = "diagnostics-bastion-${var.tre_id}"
+  target_resource_id         = azurerm_bastion_host.bastion.id
+  log_analytics_workspace_id = module.azure_monitor.log_analytics_workspace_id
+
+  enabled_log {
+    category = "BastionAuditLogs"
+  }
+
+  metric {
+    category = "AllMetrics"
+    enabled  = true
+  }
+
+  lifecycle { ignore_changes = [log_analytics_destination_type] }
+}
