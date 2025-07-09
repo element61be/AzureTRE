@@ -64,3 +64,10 @@ data "azurerm_monitor_diagnostic_categories" "webapp" {
     azurerm_linux_web_app.gitea,
   ]
 }
+
+data "azurerm_monitor_diagnostic_categories" "mysql" {
+  resource_id = azurerm_mysql_flexible_server.gitea.id
+  depends_on = [
+    azurerm_mysql_flexible_server.gitea
+  ]
+}

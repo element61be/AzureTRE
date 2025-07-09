@@ -38,3 +38,10 @@ data "azurerm_monitor_diagnostic_categories" "sb" {
     azurerm_servicebus_namespace.sb
   ]
 }
+
+data "azurerm_monitor_diagnostic_categories" "cosmos" {
+  resource_id = azurerm_cosmosdb_account.tre_db_account.id
+  depends_on = [
+    azurerm_cosmosdb_account.tre_db_account
+  ]
+}

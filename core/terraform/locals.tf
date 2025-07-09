@@ -10,6 +10,11 @@ locals {
     "AppServiceAuditLogs", "AppServiceIPSecAuditLogs", "AppServicePlatformLogs", "AppServiceAntivirusScanAuditLogs"
   ]
   servicebus_diagnostic_categories_enabled = ["OperationalLogs", "VNetAndIPFilteringLogs", "RuntimeAuditLogs", "ApplicationMetricsLogs"]
+  
+  cosmos_diagnostic_categories_enabled = [
+    "DataPlaneRequests", "MongoRequests", "QueryRuntimeStatistics", "PartitionKeyRUConsumption", "ControlPlaneRequests", "PartitionKeyStatistics", "CassandraRequests", "TableApiRequests"
+    ]
+
 
   docker_registry_server = data.azurerm_container_registry.mgmt_acr.login_server
 

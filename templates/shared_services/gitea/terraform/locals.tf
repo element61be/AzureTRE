@@ -19,4 +19,8 @@ locals {
     "AppServiceHTTPLogs", "AppServiceConsoleLogs", "AppServiceAppLogs",
     "AppServiceAuditLogs", "AppServiceIPSecAuditLogs", "AppServicePlatformLogs", "AppServiceAntivirusScanAuditLogs"
   ]
+
+  mysql_diagnostic_categories_enabled = [
+    "MySqlAuditLogs", "MySqlSlowLogs"
+  ]
 }

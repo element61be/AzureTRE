@@ -125,7 +125,7 @@ resource "azurerm_private_endpoint" "gitea_private_endpoint" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "webapp_gitea" {
-  name                       = "diag-${var.tre_id}"
+  name                       = "diagnostics-gitea-${var.tre_id}"
   target_resource_id         = azurerm_linux_web_app.gitea.id
   log_analytics_workspace_id = data.azurerm_log_analytics_workspace.tre.id
 
